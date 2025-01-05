@@ -1,6 +1,11 @@
 import Header from './Header';
 import { useRef, useState } from 'react';
 import { checkValidData } from '../utils/validate';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+import { auth } from '../utils/firebase';
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -12,8 +17,8 @@ const Login = () => {
   const password = useRef(null);
 
   const handleButtonClick = () => {
-    const nameValue = name.current.value;
-    // const nameValue = isSignInForm ? '' : name.current?.value;
+    // const nameValue = name.current.value;
+    const nameValue = isSignInForm ? '' : name.current?.value;
     // const nameValue = isSignInForm ? '' : name.current?.value || '';
     const emailValue = email.current.value;
     const passwordValue = password.current.value;
@@ -25,9 +30,39 @@ const Login = () => {
       isSignInForm
     );
     setErrorMessage(message);
-    console.log(name.current.value);
-    console.log(email.current.value);
-    console.log(password.current.value);
+
+    if (message) return;
+
+    if (!isSignInForm) {
+      // signup logic
+      createUserWithEmailAndPassword(auth, emailValue, passwordValue)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          // console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + '-' + errorMessage);
+          // ..
+        });
+    } else {
+      //signin
+      signInWithEmailAndPassword(auth, emailValue, passwordValue)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + '-' + errorMessage);
+        });
+    }
   };
   return (
     <div>
