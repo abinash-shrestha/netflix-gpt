@@ -28,31 +28,27 @@ const Header = () => {
         // https://firebase.google.com/docs/reference/js/auth.user
         const { uid, email, displayName } = user;
         dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
-        navigate('/browse')
+        navigate('/browse');
         // ...
       } else {
         // User is signed out
         dispatch(removeUser());
-        navigate('/')
+        navigate('/');
         // ...
       }
     });
 
-    return () => unsubscribe()
-
-
-  }, [])
+    return () => unsubscribe();
+  }, []);
   return (
     <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 w-screen flex justify-between ">
-      <img
-        className="w-44"
-        src={LOGO}
-      />
+      <img className="w-44" src={LOGO} alt="netflix logo" />
       {user && (
         <div className="flex items-center gap-3 p-2">
           <img
             src={USER_AVATAR}
             className="w-7 h-7"
+            alt="netflix user profile icon"
           />
           <button onClick={handleSignOut} className="font-bold text-white">
             (Sign Out)
