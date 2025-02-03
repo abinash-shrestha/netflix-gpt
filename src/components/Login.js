@@ -54,7 +54,6 @@ const Login = () => {
               dispatch(
                 addUser({ uid: uid, email: email, displayName: displayName })
               );
-
             })
             .catch((error) => {
               // An error occurred
@@ -93,6 +92,7 @@ const Login = () => {
         <img
           className=""
           src={BACKGROUND_IMAGE}
+          alt="Background of different movie poster for login page of netflix"
         />
       </div>
       <form
