@@ -19,5 +19,5 @@ export const CDN_IMG_URL = 'https://image.tmdb.org/t/p/w500/';
 
 export const SUPPORTED_LANGUAGES = [
   { identifier: "en", name: "English" },
-  { identifier: 'np', name: "Nepali" },
-  { identifier: 'es', name: "Spanish" }]
+  { identifier: 'np', name: "नेपाली" },
+  { identifier: 'es', name: "español" }]
