@@ -1,0 +1,21 @@
+[debug] [2025-02-08T17:56:38.858Z] ----------------------------------------------------------------------
+[debug] [2025-02-08T17:56:38.862Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2025-02-08T17:56:38.863Z] CLI Version:   13.30.0
+[debug] [2025-02-08T17:56:38.863Z] Platform:      win32
+[debug] [2025-02-08T17:56:38.863Z] Node Version:  v22.12.0
+[debug] [2025-02-08T17:56:38.863Z] Time:          Sat Feb 08 2025 23:41:38 GMT+0545 (Nepal Time)
+[debug] [2025-02-08T17:56:38.864Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-02-08T17:56:38.876Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-02-08T17:56:38.877Z] > authorizing via signed-in user (dev.abinashshrestha@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\shres\Desktop\LC\Namaste React\netflix-gpt
+

@@ -13,8 +13,8 @@ const firebaseConfig = {
   projectId: 'netflixgpt-545fa',
   storageBucket: 'netflixgpt-545fa.firebasestorage.app',
   messagingSenderId: '66589198426',
-  appId: '1:66589198426:web:7f520e026f5c697d9e7063',
-  measurementId: 'G-G884209Y6G',
+  appId: '1:66589198426:web:d418b383c55e1e729e7063',
+  measurementId: 'G-1QDS8CMJSE',
 };
 
 // Initialize Firebase
