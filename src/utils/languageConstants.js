@@ -8,7 +8,7 @@ const lang = {
   },
   en: {
     search: 'Search',
-    gptSearchPlaceholder: 'What would yoo like to watch today?',
+    gptSearchPlaceholder: 'What would you like to watch today?',
     gptSearchButton: 'Gpt-Search',
     signOutButton: 'Sign Out',
     homeButton: 'Home',
