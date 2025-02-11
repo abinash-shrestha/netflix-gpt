@@ -1,9 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const gemini = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
-// const gemini = new GoogleGenerativeAI(
-//   'AIzaSyB3kkm8gH5Ma0yxKCFerWS5j8-nMG4XJDE'
-// );
 
 async function generateContentWithGemini(prompt, options = {}) {
   try {
