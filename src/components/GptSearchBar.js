@@ -3,6 +3,7 @@ import lang from '../utils/languageConstants';
 import { useSelector } from 'react-redux';
 // import openAi from '../utils/openAi';
 import { generateContentWithGemini } from '../utils/gemini';
+import { API_OPTIONS } from '../utils/constants';
 
 const GptSearchBar = () => {
   const langKey = useSelector((store) => store.config.lang);
@@ -26,6 +27,16 @@ const GptSearchBar = () => {
   //   console.log(gptResults.choices);
   // };
 
+  const searchMovieTMDB = async (movie) => {
+    const data = await fetch(
+      "'https://api.themoviedb.org/3/search/movie?query=" +
+        movie +
+        'include_adult=false&language=en-US&page=1',
+      API_OPTIONS
+    );
+    const json = data.json();
+    return json.results;
+  };
   const handleGeminiSearchClick = async () => {
     if (!searchText.current || !searchText.current.value) {
       setError('Please enter a search query.');
@@ -50,6 +61,10 @@ const GptSearchBar = () => {
         .split(',')
         .map((movie) => movie.trim())
         .filter((movie) => movie !== ''); //remove any blank entries
+
+      console.log(movies);
+
+      const promiseArray = movies.map((movie) => searchMovieTMDB(movie));
     } else {
       setError(result.error);
     }
