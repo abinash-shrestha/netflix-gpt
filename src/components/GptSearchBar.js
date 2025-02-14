@@ -59,14 +59,14 @@ const GptSearchBar = () => {
     if (result.success) {
       // Split the comma-separated string into an array.
       const movies = result.text.split(',');
-      console.log(movies);
+      // console.log(movies);
 
       const promiseArray = movies.map((movie) => searchMovieTMDB(movie));
       // [Promise, Promise, Promise, Promise, Promise]
-      console.log(promiseArray);
+      // console.log(promiseArray);
 
       const tmdbResults = await Promise.all(promiseArray);
-      console.log(tmdbResults);
+      // console.log(tmdbResults);
 
       dispatch(
         addGptMovieResults({ movieNames: movies, movieResults: tmdbResults })

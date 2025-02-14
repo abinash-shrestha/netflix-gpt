@@ -35,11 +35,13 @@
 
 import { useEffect } from 'react';
 import { API_OPTIONS } from '../utils/constants';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addTrailerVideo } from '../utils/moviesSlice';
 
 const useGetTrailerVideo = (movieId) => {
   const dispatch = useDispatch();
+
+  const trailerVideo = useSelector((store) => store.movies.trailerVideo);
 
   const getMovieTrailer = async () => {
     try {
@@ -68,7 +70,7 @@ const useGetTrailerVideo = (movieId) => {
   };
 
   useEffect(() => {
-    if (movieId) getMovieTrailer();
+    if (movieId) !trailerVideo && getMovieTrailer();
   }, [movieId]); // Depend on `movieId` to ensure it is valid before calling
 };
 
