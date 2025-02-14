@@ -1,42 +1,43 @@
 import React, { useRef, useState } from 'react';
 import lang from '../utils/languageConstants';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import openAi from '../utils/openAi';
 import { generateContentWithGemini } from '../utils/gemini';
 import { API_OPTIONS } from '../utils/constants';
+import { addGptMovieResults } from '../utils/gptSlice';
 
 const GptSearchBar = () => {
   const langKey = useSelector((store) => store.config.lang);
+  const dispatch = useDispatch();
 
   const searchText = useRef(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // const handleGptSearchClick = async () => {
-  //   console.log(searchText.current.value);
-
-  //   const gptQuery =
-  //     'Act as a movie recommendation system and suggest some movies for the query' +
-  //     searchText.current.value +
-  //     '.only give me names of five movies, comma separated like in this example given here: Example Result: Gadar, Interstellar, Spiderman, Avengers, Golmaal';
-  //   const gptResults = await openAi.chat.completions.create({
-  //     messages: [{ role: 'user', content: gptQuery }],
-  //     model: 'gpt-4o',
-  //   });
-
-  //   console.log(gptResults.choices);
+  // const searchMovieTMDB = async (movie) => {
+  //   const data = await fetch(
+  //     'https://api.themoviedb.org/3/search/movie?query=' +
+  //       movie +
+  //       'include_adult=false&language=en-US&page=1',
+  //     API_OPTIONS
+  //   );
+  //   const json = await data.json();
+  //   return json.results || [];
   // };
 
   const searchMovieTMDB = async (movie) => {
-    const data = await fetch(
-      "'https://api.themoviedb.org/3/search/movie?query=" +
-        movie +
-        'include_adult=false&language=en-US&page=1',
+    const response = await fetch(
+      `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
+        movie
+      )}&include_adult=false&language=en-US&page=1`,
       API_OPTIONS
     );
-    const json = data.json();
-    return json.results;
+
+    const json = await response.json();
+    // console.log(`TMDB response for "${movie}":`, json);
+    return json.results || [];
   };
+
   const handleGeminiSearchClick = async () => {
     if (!searchText.current || !searchText.current.value) {
       setError('Please enter a search query.');
@@ -46,7 +47,7 @@ const GptSearchBar = () => {
     const userQuery = searchText.current.value;
     console.log(userQuery);
 
-    const geminiQuery = `Act as a movie recommendation system and suggest five movies for the query: "${userQuery}".  Return ONLY the movie names, comma-separated. Example: Gadar, Interstellar, Spiderman, Avengers, Golmaal`;
+    const geminiQuery = `Act as a movie and tv series recommendation system and suggest ten movies and series for the query: "${userQuery}".  Return ONLY the movie names and series, comma-separated. Example: Gadar, Interstellar, Spiderman, Avengers, Golmaal, Wednesday, Game of thrones`;
 
     const result = await generateContentWithGemini(geminiQuery, {
       // Add any desired generation config options here, like temperature, topP, etc.
@@ -56,17 +57,20 @@ const GptSearchBar = () => {
     setLoading(false);
 
     if (result.success) {
-      // Split the comma-separated string into an array.  Trim whitespace.
-      const movies = result.text
-        .split(',')
-        .map((movie) => movie.trim())
-        .filter((movie) => movie !== ''); //remove any blank entries
-
+      // Split the comma-separated string into an array.
+      const movies = result.text.split(',');
       console.log(movies);
 
       const promiseArray = movies.map((movie) => searchMovieTMDB(movie));
-    } else {
-      setError(result.error);
+      // [Promise, Promise, Promise, Promise, Promise]
+      console.log(promiseArray);
+
+      const tmdbResults = await Promise.all(promiseArray);
+      console.log(tmdbResults);
+
+      dispatch(
+        addGptMovieResults({ movieNames: movies, movieResults: tmdbResults })
+      );
     }
   };
   return (
