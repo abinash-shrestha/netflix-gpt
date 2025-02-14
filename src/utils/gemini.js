@@ -24,8 +24,6 @@ async function generateContentWithGemini(prompt, options = {}) {
 
     const response = await result.response;
     const text = response.text();
-    // const geminiMovies = text.split(',');
-    // console.log(geminiMovies);
 
     return { success: true, text };
   } catch (error) {
