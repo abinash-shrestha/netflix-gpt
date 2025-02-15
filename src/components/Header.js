@@ -55,10 +55,10 @@ const Header = () => {
 
   const langKey = useSelector((store) => store.config.lang);
   return (
-    <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 w-screen flex justify-between ">
-      <img className="w-44" src={LOGO} alt="netflix logo" />
+    <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 w-screen flex flex-col  sm:justify-between sm:flex-row  ">
+      <img className="w-44 mx-auto md:mx-0" src={LOGO} alt="netflix logo" />
       {user && (
-        <div className="flex items-center gap-3 p-2">
+        <div className="flex items-center gap-3 p-2 mx-auto text-xs sm:mx-0 sm:text-base">
           {showGptSearch && (
             <select
               className="py-1 px-3 rounded-md bg-gray-700 text-white"
@@ -88,7 +88,7 @@ const Header = () => {
           />
           <button
             onClick={handleSignOut}
-            className="font-bold text-white bg-red-800 py-1 px-3 rounded-md"
+            className="font-bold text-white px-3 bg-red-800 py-1 rounded-md"
           >
             {lang[langKey].signOutButton}
           </button>
