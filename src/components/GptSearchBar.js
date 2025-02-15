@@ -74,19 +74,19 @@ const GptSearchBar = () => {
     }
   };
   return (
-    <div className="pt-[6%] flex justify-center">
+    <div className="pt-[40%] sm:pt-[20%] md:pt-[12%] flex justify-center">
       <form
-        className="bg-black w-1/2 grid grid-cols-12 rounded-lg bg-opacity-75 px-6 py-2"
+        className="bg-black w-[95%] sm:w-[80%] md:w-[60%] grid grid-cols-12 rounded-lg bg-opacity-75 p-2 md:p-2"
         onSubmit={(e) => e.preventDefault()}
       >
         <input
           ref={searchText}
           type="text"
-          className="p-4 m-4 text-gray-500 col-span-9 rounded-lg"
+          className="mx-2 my-1 px-2 py-2 text-center text-gray-500 col-span-8 text-xs sm:col-span-9 sm:text-sm md:text-base rounded-lg"
           placeholder={lang[langKey].gptSearchPlaceholder}
         />
         <button
-          className="px-3 py-1 m-6 bg-red-500 rounded-md text-white col-span-3 font-bold"
+          className="mx-2 my-1 px-2 py-2 bg-red-500 rounded-md text-white text-xs col-span-4 sm:col-span-3 sm:text-sm font-normal  "
           onClick={handleGeminiSearchClick}
         >
           {lang[langKey].search}
