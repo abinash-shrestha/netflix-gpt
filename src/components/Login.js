@@ -85,21 +85,21 @@ const Login = () => {
     }
   };
   return (
-    <div>
-      <Header className />
+    <div className="overflow-x-hidden w-full h-full">
+      <Header />
 
-      <div className="absolute">
+      <div className="absolute inset-0 h-full w-full overflow-hidden">
         <img
-          className=""
+          className="fixed top-0 left-0 w-screen h-screen object-cover"
           src={BACKGROUND_IMAGE}
           alt="Background of different movie poster for login page of netflix"
         />
       </div>
-      <form
+      {/* <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute bg-black bg-opacity-70 p-12 w-3/12 my-36 mx-auto right-0 left-0 text-white rounded-xl"
+        className="absolute bg-black bg-opacity-70 p-6 md:p-12 w-3/4 md:w-3/12  my-20 md:my-36 mx-auto right-0 left-0 text-white rounded-xl"
       >
-        <h2 className="font-bold text-3xl py-4 m-2">
+        <h2 className=" font-semibold text-lg md:font-bold md:text-3xl md:py-4 md:m-2">
           {isSignInForm ? 'Sign in' : 'Sign up'}
         </h2>
         {!isSignInForm && (
@@ -131,6 +131,66 @@ const Login = () => {
         </button>
 
         <p className="cursor-pointer" onClick={toggleSignInForm}>
+          {isSignInForm
+            ? 'New to Netflix? Sign Up Now'
+            : 'Already Registered? Sign In Now'}
+        </p>
+      </form> */}
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="absolute bg-black bg-opacity-70 p-3 sm:p-5 md:p-10 lg:p-12 w-9/12 sm:w-3/4 md:w-2/5 lg:w-1/4 my-20 mt-24 md:my-24 mx-auto right-0 left-0 text-white rounded-xl shadow-lg"
+      >
+        {/* Form Heading */}
+        <h2 className="font-semibold text-lg sm:text-xl md:text-3xl mb-3 sm:mb-4 text-center">
+          {isSignInForm ? 'Sign in' : 'Sign up'}
+        </h2>
+
+        {/* Full Name Field (Visible only for Sign-Up) */}
+        {!isSignInForm && (
+          <input
+            ref={name}
+            className="p-2 sm:p-3 mb-2 sm:mb-3 w-full text-sm sm:text-base bg-gray-800 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+            placeholder="Full Name"
+            type="text"
+          />
+        )}
+
+        {/* Email Field */}
+        <input
+          ref={email}
+          className="p-2 sm:p-3 mb-2 sm:mb-3 w-full text-sm sm:text-base bg-gray-800 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+          placeholder="Email Address"
+          type="email"
+        />
+
+        {/* Password Field */}
+        <input
+          ref={password}
+          className="p-2 sm:p-3 mb-2 sm:mb-3 w-full text-sm sm:text-base bg-gray-800 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+          placeholder="Password"
+          type="password"
+        />
+
+        {/* Error Message */}
+        {errormessage && (
+          <p className="text-red-500 text-xs sm:text-sm text-center mb-2 sm:mb-3">
+            {errormessage}
+          </p>
+        )}
+
+        {/* Submit Button */}
+        <button
+          className="p-2 sm:p-3 mb-4 sm:mb-5 mt-2 bg-red-700 hover:bg-red-800 transition-all text-white w-full rounded-md text-sm sm:text-base font-semibold"
+          onClick={handleButtonClick}
+        >
+          {isSignInForm ? 'Sign in' : 'Sign up'}
+        </button>
+
+        {/* Toggle Form */}
+        <p
+          className="text-xs sm:text-sm text-center cursor-pointer text-gray-300 hover:text-white transition-all"
+          onClick={toggleSignInForm}
+        >
           {isSignInForm
             ? 'New to Netflix? Sign Up Now'
             : 'Already Registered? Sign In Now'}
